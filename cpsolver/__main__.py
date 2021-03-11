@@ -3,8 +3,10 @@ import click
 
 from cpsolver.puzzlesolver import PuzzleSolver
 
-def main():
-    solver = PuzzleSolver("sample.toml")
+@click.command()
+@click.argument('filename')
+def main(filename):
+    solver = PuzzleSolver(filename)
     solver.solve()
 
 if __name__ == '__main__':

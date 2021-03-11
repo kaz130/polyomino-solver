@@ -5,6 +5,6 @@
 ```sh
 echo "TOKEN=access_token" > .env
 
-python -m cpsolver
+python -m cpsolver sample.toml
 ```
 
