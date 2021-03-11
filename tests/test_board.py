@@ -16,3 +16,6 @@ def test_get_block():
 
 def test_get_size():
     assert board.get_size() == (2, 3)
+
+def test_get_blocks():
+    assert len(board.get_blocks()) == 5

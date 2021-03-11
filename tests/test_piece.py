@@ -14,6 +14,14 @@ def test_get_block():
     assert all([piece.get_block(i, 1, 1) for i in range(8)]) == True
     assert all([piece.get_block(i, 3, 3) for i in range(8)]) == False
 
+def test_get_blocks():
+    assert len(piece.get_blocks(0)) == 5
+
+    blocks = piece.get_blocks(0, (2, 3))
+    for b in piece.get_blocks(0):
+        assert (b[0]+2, b[1]+3) in blocks
+
+
 def test_get_size():
     assert set([piece.get_size(i) for i in range(8)]) == {(2, 3), (3, 2)}
 

@@ -13,6 +13,9 @@ class Board():
 
     def get_block(self, x, y):
         return True if (x, y) in self.blocks else False
+
+    def get_blocks(self):
+        return self.blocks
     
     def get_size(self):
         h = max([b[1] for b in self.blocks]) + 1

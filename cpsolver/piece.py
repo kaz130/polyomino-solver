@@ -33,6 +33,9 @@ class Piece():
     def get_block(self, p, x, y):
         return True if (x, y) in self.placed_pieces[p] else False
 
+    def get_blocks(self, p, offset=(0, 0)):
+        return set(((b[0]+offset[0], b[1]+offset[1]) for b in self.placed_pieces[p]))
+
     def get_size(self, p):
         h = max([b[1] for b in self.placed_pieces[p]]) + 1
         w = max([b[0] for b in self.placed_pieces[p]]) + 1
