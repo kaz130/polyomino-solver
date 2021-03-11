@@ -29,7 +29,6 @@ class Piece():
         uniqued_blocks = set([tuple(sorted(blocks)) for blocks in blocks_list])
         self.placement_count = len(uniqued_blocks)
         self.placed_pieces = tuple([set(blocks) for blocks in uniqued_blocks])
-        print(self.placed_pieces)
 
     def get_block(self, p, x, y):
         return True if (x, y) in self.placed_pieces[p] else False
