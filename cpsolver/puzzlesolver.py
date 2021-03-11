@@ -21,7 +21,7 @@ class PuzzleSolver():
         load_dotenv()
         self.client = FixstarsClient()
         self.client.token = os.getenv("TOKEN")
-        self.client.parameters.timeout = 1000
+        self.client.parameters.timeout = 10000
         self.client.parameters.outputs.duplicate = True
         if os.getenv("https_proxy") is not None:
             self.client.proxy = os.getenv("https_proxy")
@@ -93,8 +93,20 @@ class PuzzleSolver():
         if len(result) == 0:
             raise RuntimeError("Any one of constaraints is not satisfied.")
 
-        values = result[0].values
+        for solution in result:
+            print(f"energy = {solution.energy}")
+            values = solution.values
+            q_values = decode_solution(q, values)
+            self.print_answer(q_values)
 
-        q_values = decode_solution(q, values)
-        print(q_values)
-
+    def print_answer(self, answer):
+        board = [[" "] * self.board.get_size()[1] for i in range(self.board.get_size()[0])]
+        for y in range(self.board.get_size()[0]):
+            for x in range(self.board.get_size()[1]):
+                for i in range(len(self.pieces)):
+                    for j in range(8):
+                        if answer[y][x][i][j] == 1:
+                            for b in self.pieces[i].get_blocks(j, offset=(x, y)):
+                                board[b[1]][b[0]] = str(i)
+        for l in board:
+            print(''.join(l))
