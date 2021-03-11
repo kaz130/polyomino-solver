@@ -93,20 +93,23 @@ class PuzzleSolver():
         if len(result) == 0:
             raise RuntimeError("Any one of constaraints is not satisfied.")
 
-        for solution in result:
+        print(f"results count = {len(list(result))}")
+
+        for i, solution in enumerate(result):
+            if i >= 10: break
             print(f"energy = {solution.energy}")
             values = solution.values
             q_values = decode_solution(q, values)
             self.print_answer(q_values)
 
     def print_answer(self, answer):
-        board = [[" "] * self.board.get_size()[1] for i in range(self.board.get_size()[0])]
+        board = [["   "] * self.board.get_size()[1] for i in range(self.board.get_size()[0])]
         for y in range(self.board.get_size()[0]):
             for x in range(self.board.get_size()[1]):
                 for i in range(len(self.pieces)):
                     for j in range(8):
                         if answer[y][x][i][j] == 1:
                             for b in self.pieces[i].get_blocks(j, offset=(x, y)):
-                                board[b[1]][b[0]] = str(i)
+                                board[b[1]][b[0]] = str(f"{i:>3}")
         for l in board:
             print(''.join(l))
