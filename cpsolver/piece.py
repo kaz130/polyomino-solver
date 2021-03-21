@@ -26,7 +26,7 @@ class Piece():
                 new_blocks.add((b[1], b[0]))
                 blocks = new_blocks
 
-        uniqued_blocks = set([tuple(sorted(blocks)) for blocks in blocks_list])
+        uniqued_blocks = sorted(set([tuple(sorted(blocks)) for blocks in blocks_list]))
         self.placement_count = len(uniqued_blocks)
         self.placed_pieces = tuple([set(blocks) for blocks in uniqued_blocks])
 

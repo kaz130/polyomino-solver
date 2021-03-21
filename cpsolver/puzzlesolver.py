@@ -13,6 +13,7 @@ from amplify.client import FixstarsClient
 
 from cpsolver.piece import Piece 
 from cpsolver.board import Board 
+from cpsolver.visualizer import Visualizer
 
 class PuzzleSolver():
 
@@ -22,7 +23,7 @@ class PuzzleSolver():
         self.client = FixstarsClient()
         self.client.token = os.getenv("TOKEN")
         self.client.parameters.timeout = 10000
-        self.client.parameters.outputs.duplicate = True
+        self.client.parameters.outputs.duplicate = False
         if os.getenv("https_proxy") is not None:
             self.client.proxy = os.getenv("https_proxy")
 
@@ -38,7 +39,6 @@ class PuzzleSolver():
         self.board = Board(board_str)
 
     def solve(self):
-
         q = gen_symbols(BinaryPoly, *self.board.get_size(), len(self.pieces), 8)
 
 
@@ -56,7 +56,6 @@ class PuzzleSolver():
                     for j in range(self.pieces[i].placement_count):
                         if len(self.pieces[i].get_blocks(j, (x, y)) - self.board.get_blocks()) > 0:
                             q[y][x][i][j] = BinaryPoly(0)
-
 
         # 制約(c) ピース同士は重ならずボードを全て埋める
         s = dict()
@@ -93,23 +92,8 @@ class PuzzleSolver():
         if len(result) == 0:
             raise RuntimeError("Any one of constaraints is not satisfied.")
 
-        print(f"results count = {len(list(result))}")
+        solution = result[0]
+        values = solution.values
+        q_values = decode_solution(q, values)
+        Visualizer().visualize(self.pieces, self.board, q_values)
 
-        for i, solution in enumerate(result):
-            if i >= 10: break
-            print(f"energy = {solution.energy}")
-            values = solution.values
-            q_values = decode_solution(q, values)
-            self.print_answer(q_values)
-
-    def print_answer(self, answer):
-        board = [["   "] * self.board.get_size()[1] for i in range(self.board.get_size()[0])]
-        for y in range(self.board.get_size()[0]):
-            for x in range(self.board.get_size()[1]):
-                for i in range(len(self.pieces)):
-                    for j in range(8):
-                        if answer[y][x][i][j] == 1:
-                            for b in self.pieces[i].get_blocks(j, offset=(x, y)):
-                                board[b[1]][b[0]] = str(f"{i:>3}")
-        for l in board:
-            print(''.join(l))
