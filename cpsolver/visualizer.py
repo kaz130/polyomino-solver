@@ -18,7 +18,6 @@ class Visualizer():
                         if q_values[y][x][i][j] == 1:
                             for b in pieces[i].get_blocks(j, offset=(x, y)):
                                 solved_board[b[1]+1][b[0]+1] = i
-        print()
 
         board_str = [[' '] * (board.get_size()[1] * 2 + 1) for i in range(board.get_size()[0] + 1)]
         for y, boad_line in enumerate(solved_board[:-1]):

@@ -25,7 +25,5 @@ q_values = [
 
 def test_visualize():
     r = '\n'.join(map(lambda x: ''.join(x), Visualizer().make_str([piece], board, q_values)))
-    print(r)
-    print(expectation)
     assert r == expectation
 
