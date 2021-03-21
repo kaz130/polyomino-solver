@@ -1,6 +1,6 @@
 class Piece():
 
-    def __init__(self, piece_str):
+    def __init__(self, piece_str, can_rotate, can_reverse):
         self.piece_str = piece_str
         h = len(self.piece_str)
         w = max([len(l) for l in self.piece_str])
@@ -15,11 +15,13 @@ class Piece():
         for i in range(2):
             for j in range(4):
                 blocks_list.append(blocks)
+                if not can_rotate: break
                 new_blocks = set()
                 h, w = (w, h)
                 for b in blocks:
                     new_blocks.add((b[1], -b[0]+h-1))
                 blocks = new_blocks
+            if not can_reverse: break
             new_blocks = set()
             h, w = (w, h)
             for b in blocks:

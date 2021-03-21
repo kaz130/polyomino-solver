@@ -28,14 +28,19 @@ class PuzzleSolver():
             self.client.proxy = os.getenv("https_proxy")
 
         with open(puzzle) as f:
-            puzzle = f.read()
+            puzzle = parse(f.read())
 
-        pieces_str = map(lambda x: x.split("\n"), parse(puzzle)["pieces"].split("\n\n"))
+        can_rotate = puzzle.get("can_rotate", True)
+        can_reverse = puzzle.get("can_reverse", True) if can_rotate else False
+
+        pieces_str = list(map(lambda x: x.split("\n"), puzzle["pieces"].split("\n\n")))
+        pieces_str = list(map(lambda p: list(filter(lambda x: '#' in x, p)), pieces_str))
+        pieces_str = list(filter(lambda x: len(x) != 0, pieces_str))
         self.pieces = list()
         for p in pieces_str:
-            self.pieces.append(Piece(p))
+            self.pieces.append(Piece(p, can_rotate, can_reverse))
 
-        board_str = parse(puzzle)["board"].split("\n")
+        board_str = puzzle["board"].split("\n")
         self.board = Board(board_str)
 
     def solve(self):
