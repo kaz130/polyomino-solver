@@ -1,6 +1,6 @@
 class Piece():
 
-    def __init__(self, piece_str, can_rotate, can_reverse):
+    def __init__(self, piece_str, can_rotate=True, can_reverse=True):
         self.piece_str = piece_str
         h = len(self.piece_str)
         w = max([len(l) for l in self.piece_str])
