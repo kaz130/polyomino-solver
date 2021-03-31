@@ -4,19 +4,41 @@
 事前に Fixstars Amplify のアカウント登録とアクセストークンの取得が必要．
 
 ## Requirement
+
 - Python 3.9
 
-## Usage
+## 実行方法
+
+1. アクセストークンを入力する
 ```sh
 echo "TOKEN=access_token" > .env
+```
+
+1. パッケージをインストールする
+```sh
 pip install -r requirements.txt
-python -m psolver sample.toml
+```
+
+1. プログラムを実行する
+```
+python -m psolver sample1.toml
+```
+
+## 実行結果
+
+```
+$ python -m psolver sample1.toml
+┏━━━┳━━━┓
+┃ ┏━┻━┓ ┃
+┣━┛ ┏━┫ ┃
+┃ ┏━┛ ┗━┫
+┗━┻━━━━━┛
 ```
 
 ## 提出前チェック
 
 
-- [ ] README.mdの手順通りにして、プログラムが実行できる
-- [ ] 説明用スライドを用意した 
-- [ ] アクセストークンはリポジトリに含まれていない
-- [ ] MIT Licenseにした
+- [x] README.mdの手順通りにして、プログラムが実行できる
+- [x] 説明用スライドを用意した 
+- [x] アクセストークンはリポジトリに含まれていない
+- [x] MIT Licenseにした
