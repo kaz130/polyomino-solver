@@ -1,7 +1,7 @@
 import sys
 import click
 
-from cpsolver.puzzlesolver import PuzzleSolver
+from psolver.puzzlesolver import PuzzleSolver
 
 @click.command()
 @click.argument('filename')

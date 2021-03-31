@@ -1,6 +1,6 @@
 import pytest
 
-from cpsolver.board import Board
+from psolver.board import Board
 
 board_str = '''
 ###

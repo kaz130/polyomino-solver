@@ -1,6 +1,6 @@
 import pytest
 
-from cpsolver.piece import Piece
+from psolver.piece import Piece
 
 piece_str = '''
  ##

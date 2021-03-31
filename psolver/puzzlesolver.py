@@ -11,9 +11,9 @@ from amplify import (
 from amplify.constraint import equal_to
 from amplify.client import FixstarsClient
 
-from cpsolver.piece import Piece 
-from cpsolver.board import Board 
-from cpsolver.visualizer import Visualizer
+from psolver.piece import Piece 
+from psolver.board import Board 
+from psolver.visualizer import Visualizer
 
 class PuzzleSolver():
 
