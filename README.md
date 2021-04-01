@@ -14,12 +14,12 @@
 echo "TOKEN=access_token" > .env
 ```
 
-1. パッケージをインストールする
+2. パッケージをインストールする
 ```sh
 pip install -r requirements.txt
 ```
 
-1. プログラムを実行する
+3. プログラムを実行する
 ```
 python -m psolver sample1.toml
 ```
